@@ -45,13 +45,7 @@ def star_5_solution(input_list):
 
 '''
 The same as Star 5, but now we iterate over a list of several 
-different potential slopes. This isn't the most efficient solution—
-as you could do it on a singular pass through the map by creating
-a datastructure that pairs each down with each possible right combination
-for that down, then iterates through each line checking which down modulos
-to use, then checking only the relevant "move rights" for each. But
-that's more time than I feel like spending on AoC 2020. I'm just describing
-the algorithm for posterity.
+different potential slopes.
 '''
 def star_6_solution(input_list):
     
