@@ -84,6 +84,5 @@ if __name__ == "__main__":
     input_list.append("")
     processed_customs_sheets_s11 = process_customs_sheets_s11(input_list)
     processed_customs_sheets_s12 = process_customs_sheets_s12(input_list)
-    #print(processed_customs_sheets_s12)
     print( "Star 11 Solution: {}".format(star_11_solution(processed_customs_sheets_s11)) )
     print( "Star 12 Solution: {}".format(star_12_solution(processed_customs_sheets_s12)) )
