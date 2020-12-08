@@ -2,6 +2,7 @@ import enum
 import os, sys
 import math
 import re
+import timeit
 
 def startup_code():
 
@@ -149,11 +150,23 @@ def add_children_to_baggage_tree(baggage_key, baggage_rules, current_node):
     if None in children_to_add:
         return
 
+    # Memoization time! If we've already calculated
+    # the current node's children, there's no reason
+    # for us to do so again...
+    if baggage_key in memo:
+        #print("cache hit: {}".format(baggage_key))
+        current_node.children = memo[baggage_key]
+        return
+
     for child_key, qty in children_to_add.items():
         new_child_node = Node(child_key, qty)
         add_children_to_baggage_tree(child_key, baggage_rules, new_child_node)
         current_node.addNode(new_child_node)
 
+    # In the name of memoization, cache the children!
+    if baggage_key not in memo:
+        #print("cache add: {}".format(baggage_key))
+        memo[baggage_key] = current_node.children
 
 '''
 We build a "baggage tree" by taking in a color of bag for our
@@ -210,9 +223,17 @@ def star_14_solution(baggage_rules):
 
     return build_baggage_tree("shiny gold", baggage_rules).total_num_bags_inside()
 
-
+memo = {}
 if __name__ == "__main__":
     input_list = startup_code()
     baggage_rules = process_baggage_rules(input_list)
+
+    start = timeit.default_timer()
     print( "Star 13 Solution: {}".format(star_13_solution(baggage_rules)) )
+    stop = timeit.default_timer()
+    print( '  Runtime: {}s'.format(stop - start) ) 
+
+    start = timeit.default_timer()
     print( "Star 14 Solution: {}".format(star_14_solution(baggage_rules)) )
+    stop = timeit.default_timer()
+    print( '  Runtime: {}s'.format(stop - start) )
