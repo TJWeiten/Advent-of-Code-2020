@@ -223,6 +223,7 @@ def star_14_solution(baggage_rules):
 
     return build_baggage_tree("shiny gold", baggage_rules).total_num_bags_inside()
 
+
 memo = {}
 if __name__ == "__main__":
     input_list = startup_code()
